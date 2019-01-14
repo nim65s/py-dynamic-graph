@@ -1,6 +1,7 @@
 SET(${PY_NAME}_SOURCES
+  ${PY_NAME}
   signal
-  #entity
+  entity
   )
 
 ADD_LIBRARY(${PY_NAME} SHARED ${${PY_NAME}_SOURCES})
