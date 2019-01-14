@@ -18,11 +18,23 @@ class TestSignal(unittest.TestCase):
 
         self.assertEqual(signal.period_time, 1)
 
+        # setPeriodTime is pure virtual in SignalBase
+        # signal.period_time = 10
+        # self.assertEqual(signal.period_time, 10)
+
         other_signal = SignalBase('other')
 
         signal.add_dependency(other_signal)
         signal.remove_dependency(other_signal)
         signal.clear_dependencies()
+
+        self.assertFalse(signal.is_plugged())
+        with self.assertRaises(Exception):
+            signal.plug(other_signal)
+        with self.assertRaises(Exception):
+            signal.unplug()
+        with self.assertRaises(Exception):
+            signal.set_constant_default()
 
 
 if __name__ == '__main__':
