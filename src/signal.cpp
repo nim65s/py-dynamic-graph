@@ -1,6 +1,6 @@
 #include <dynamic-graph/signal.h>
 #include <boost/python.hpp>
-#include "py_dynamic_graph.hpp"
+#include <py-dynamic-graph/py-dynamic-graph.hpp>
 
 namespace dynamicgraph
 {
@@ -39,11 +39,12 @@ namespace dynamicgraph
       .def("short_name", &SignalBase<Time>::shortName)
       //.def("extract_node_and_local_names", &SignalBase<Time>::extractNodeAndLocalNames)
       .def("check_compatibility", &SignalBase<Time>::checkCompatibility)
+      //.def(str(self))
       ;
 
   }
-  void expose_signal()
-  {
+  //void expose_signal()
+  //{
     //class_<Signal<Vector, Time>>("Signal", init<std::string>());
-  }
+  //}
 }
