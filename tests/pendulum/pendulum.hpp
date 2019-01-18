@@ -7,7 +7,9 @@ namespace dynamicgraph {
   class InvertedPendulum : public Entity::Entity
   {
     public:
-      InvertedPendulum(const std::string& inName);
+      InvertedPendulum(const std::string& inName, double cartMass = 1.0, double
+          pendulumMass = 1.0, double pendulumLength = 1.0, double viscosity =
+          0.1);
 
       /// Each entity should provide the name of the class it belongs to
       virtual const std::string& getClassName (void) const {
@@ -18,6 +20,38 @@ namespace dynamicgraph {
       virtual std::string getDocString () const {
         return
           "Classical inverted pendulum dynamic model\n";
+      }
+
+      double getCartMass() const {
+        return cartMass_;
+      }
+
+      void setCartMass(const double& mass) {
+        cartMass_ = mass;
+      }
+
+      double getPendulumMass() const {
+        return pendulumMass_;
+      }
+
+      void setPendulumMass(const double& mass) {
+        pendulumMass_ = mass;
+      }
+
+      double getPendulumLength() const {
+        return pendulumLength_;
+      }
+
+      void setPendulumLength(const double& length) {
+        pendulumLength_ = length;
+      }
+
+      double getViscosity() {
+        return viscosity_;
+      }
+
+      void setViscosity(const double& visc) {
+        viscosity_ = visc;
       }
 
     protected:
