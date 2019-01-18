@@ -12,7 +12,6 @@ SET(PROJECT_DESCRIPTION "sot/dynamic-graph-python, but in boost::python")
 SET(PROJECT_URL https://github.com/${PROJECT_ORG}/${PROJECT_NAME})
 
 SET(CUSTOM_HEADER_DIR "py-dynamic-graph")
-SET(PKGCONFIG_PYTHON_NAME TRUE)
 
 SETUP_PROJECT()
 
