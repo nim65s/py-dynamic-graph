@@ -5,12 +5,14 @@
 namespace dynamicgraph
 {
   typedef int Time;
+  typedef double T;
 
   void translate(ExceptionSignal const& e)
   {
     PyErr_SetString(PyExc_RuntimeError, e.getExceptionName().c_str());
   }
 
+  // TODO void expose_signal<T, Time>()
   void expose_signal_base()
   {
     using namespace boost::python;
@@ -40,6 +42,9 @@ namespace dynamicgraph
       //.def("extract_node_and_local_names", &SignalBase<Time>::extractNodeAndLocalNames)
       .def("check_compatibility", &SignalBase<Time>::checkCompatibility)
       //.def(str(self))
+      ;
+
+    class_<Signal<T, Time>, bases<SignalBase<Time> >, boost::noncopyable>("Signal", init<std::string>())
       ;
 
   }

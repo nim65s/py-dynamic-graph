@@ -1,6 +1,6 @@
 import unittest
 
-from libpy_dynamic_graph import SignalBase
+from libpy_dynamic_graph import Signal, SignalBase
 
 
 class TestSignal(unittest.TestCase):
@@ -35,6 +35,12 @@ class TestSignal(unittest.TestCase):
             signal.unplug()
         with self.assertRaises(Exception):
             signal.set_constant_default()
+
+    def test_signal(self):
+        name = 'test signal'
+        signal = Signal(name)
+
+        self.assertEqual(signal.name, name)
 
 
 if __name__ == '__main__':
