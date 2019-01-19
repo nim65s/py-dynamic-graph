@@ -3,7 +3,8 @@ from collections import OrderedDict
 
 from libpy_pendulum import InvertedPendulum
 
-MEMBERS = OrderedDict([('cart_mass', 4.2), ('pendulum_mass', 2.3), ('pendulum_length', 0.8), ('viscosity', 0.5)])
+MEMBERS = OrderedDict([('cart_mass', 4.2), ('pendulum_mass', 2.3),
+                       ('pendulum_length', 0.8), ('viscosity', 0.5)])
 
 
 class TestInvertedPendulum(unittest.TestCase):
@@ -12,6 +13,9 @@ class TestInvertedPendulum(unittest.TestCase):
         ip = InvertedPendulum(name)
 
         self.assertEqual(ip.name, name)
+        self.assertEqual(ip.class_name, 'InvertedPendulum')
+        self.assertEqual(ip.docstring,
+                         'Classical inverted pendulum dynamic model\n')
 
         for member, value in MEMBERS.items():
             setattr(ip, member, value)
