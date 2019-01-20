@@ -21,6 +21,13 @@ class TestInvertedPendulum(unittest.TestCase):
             setattr(ip, member, value)
             self.assertEqual(getattr(ip, member), value)
 
+        for _ in range(100):
+            ip.incr(1e-3)
+
+        self.assertTrue(ip.has_signal('state'))
+        self.assertTrue(ip.has_signal('force'))
+        self.assertFalse(ip.has_signal('plop'))
+
         ip2 = InvertedPendulum(name + '2', *MEMBERS.values())
         for member, value in MEMBERS.items():
             self.assertEqual(getattr(ip2, member), value)

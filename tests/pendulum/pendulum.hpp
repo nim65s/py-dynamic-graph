@@ -2,6 +2,8 @@
 #define PY_DG_TEST_PENDULUM_HH
 
 #include <dynamic-graph/entity.h>
+#include <dynamic-graph/signal-ptr.h>
+#include <dynamic-graph/linear-algebra.h>
 
 namespace dynamicgraph {
   class InvertedPendulum : public Entity::Entity
@@ -54,6 +56,8 @@ namespace dynamicgraph {
         viscosity_ = visc;
       }
 
+      void incr(double inTimeStep);
+
     protected:
       static const std::string CLASS_NAME;
 
@@ -62,6 +66,11 @@ namespace dynamicgraph {
       double pendulumMass_;
       double pendulumLength_;
       double viscosity_;
+
+      SignalPtr<double, int> forceSIN;
+      Signal<Vector, int> stateSOUT;
+
+      Vector computeDynamics(const Vector& inState, const double& inControl, double& inTimeStep);
 
   };
 }
