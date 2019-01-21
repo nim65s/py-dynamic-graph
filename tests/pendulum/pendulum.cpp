@@ -10,17 +10,17 @@ namespace dynamicgraph {
   InvertedPendulum::InvertedPendulum(const std::string& inName, double cartMass,
       double pendulumMass, double pendulumLength, double viscosity):
     Entity(inName), cartMass_(cartMass), pendulumMass_(pendulumMass),
-    pendulumLength_(pendulumLength), viscosity_(viscosity), forceSIN(NULL,
-        "InvertedPendulum("+inName+"::input(double)::force"),
-    stateSOUT("InvertedPendulum("+inName+"::output(vector)::state")
+    pendulumLength_(pendulumLength), viscosity_(viscosity),
+    forceSIN(new SignalPtr<double, int>(NULL, "InvertedPendulum("+inName+"::input(double)::force")),
+    stateSOUT(new Signal<Vector, int>("InvertedPendulum("+inName+"::output(vector)::state"))
   {
-    signalRegistration(forceSIN);
-    signalRegistration(stateSOUT);
+    signalRegistration(*forceSIN);
+    signalRegistration(*stateSOUT);
     double input = 0.;
-    forceSIN.setConstant(input);
+    forceSIN->setConstant(input);
     Vector state(4);
     state.fill(0.1);
-    stateSOUT.setConstant(state);
+    stateSOUT->setConstant(state);
   }
 
   Vector InvertedPendulum::computeDynamics(const Vector& inState, const double& inControl, double& inTimeStep)
@@ -64,10 +64,14 @@ namespace dynamicgraph {
 
   void InvertedPendulum::incr(double inTimeStep)
   {
-    int t = stateSOUT.getTime();
-    std::cout << stateSOUT(t).transpose() << std::endl;
-    stateSOUT.setConstant(computeDynamics(stateSOUT(t), forceSIN(t), inTimeStep));
-    stateSOUT.setTime(t+1);
-    forceSIN(t+1);
+    int t = stateSOUT->getTime();
+    std::cout << stateSOUT->access(t).transpose() << std::endl;
+    stateSOUT->setConstant(computeDynamics(stateSOUT->access(t), forceSIN->access(t), inTimeStep));
+    stateSOUT->setTime(t+1);
+    forceSIN->access(t+1);
+  }
+
+  std::shared_ptr<const SignalBase<int> > InvertedPendulum::getConstForceSignal() const {
+    return forceSIN;
   }
 }

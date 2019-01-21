@@ -1,10 +1,9 @@
 import unittest
 from collections import OrderedDict
 
-from libpy_pendulum import InvertedPendulum
+from libpy_pendulum import InvertedPendulum, SignalBase
 
-MEMBERS = OrderedDict([('cart_mass', 4.2), ('pendulum_mass', 2.3),
-                       ('pendulum_length', 0.8), ('viscosity', 0.5)])
+MEMBERS = OrderedDict([('cart_mass', 4.2), ('pendulum_mass', 2.3), ('pendulum_length', 0.8), ('viscosity', 0.5)])
 
 
 class TestInvertedPendulum(unittest.TestCase):
@@ -14,8 +13,7 @@ class TestInvertedPendulum(unittest.TestCase):
 
         self.assertEqual(ip.name, name)
         self.assertEqual(ip.class_name, 'InvertedPendulum')
-        self.assertEqual(ip.docstring,
-                         'Classical inverted pendulum dynamic model\n')
+        self.assertEqual(ip.docstring, 'Classical inverted pendulum dynamic model\n')
 
         for member, value in MEMBERS.items():
             setattr(ip, member, value)
@@ -31,6 +29,10 @@ class TestInvertedPendulum(unittest.TestCase):
         ip2 = InvertedPendulum(name + '2', *MEMBERS.values())
         for member, value in MEMBERS.items():
             self.assertEqual(getattr(ip2, member), value)
+
+        force = ip.force
+        self.assertTrue(isinstance(force, SignalBase))
+        self.assertEqual(force.time, 0)
 
 
 if __name__ == '__main__':

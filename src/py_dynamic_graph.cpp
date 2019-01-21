@@ -1,4 +1,3 @@
-#include <boost/python.hpp>
 #include <py-dynamic-graph/py-dynamic-graph.hpp>
 
 BOOST_PYTHON_MODULE(libpy_dynamic_graph)
@@ -8,4 +7,5 @@ BOOST_PYTHON_MODULE(libpy_dynamic_graph)
 
   expose_signal_base();
   expose_entity();
+  register_types();
 }

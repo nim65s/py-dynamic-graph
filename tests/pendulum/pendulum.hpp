@@ -58,6 +58,8 @@ namespace dynamicgraph {
 
       void incr(double inTimeStep);
 
+      std::shared_ptr<const SignalBase<int> > getConstForceSignal() const;
+
     protected:
       static const std::string CLASS_NAME;
 
@@ -67,8 +69,8 @@ namespace dynamicgraph {
       double pendulumLength_;
       double viscosity_;
 
-      SignalPtr<double, int> forceSIN;
-      Signal<Vector, int> stateSOUT;
+      std::shared_ptr<SignalPtr<double, int> > forceSIN;
+      std::shared_ptr<Signal<Vector, int> > stateSOUT;
 
       Vector computeDynamics(const Vector& inState, const double& inControl, double& inTimeStep);
 

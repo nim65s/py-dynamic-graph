@@ -1,11 +1,8 @@
-#include <dynamic-graph/signal.h>
-#include <boost/python.hpp>
 #include <py-dynamic-graph/py-dynamic-graph.hpp>
 
 namespace dynamicgraph
 {
-  typedef int Time;
-  typedef double T;
+  using namespace boost::python;
 
   void translate(ExceptionSignal const& e)
   {
@@ -15,7 +12,6 @@ namespace dynamicgraph
   // TODO void expose_signal<T, Time>()
   void expose_signal_base()
   {
-    using namespace boost::python;
 
     register_exception_translator<ExceptionSignal>(&translate);
 
@@ -47,7 +43,14 @@ namespace dynamicgraph
     class_<Signal<T, Time>, bases<SignalBase<Time> >, boost::noncopyable>("Signal", init<std::string>())
       ;
 
+
   }
+
+  void register_types()
+  {
+    register_ptr_to_python< std::shared_ptr<SignalBase<Time> const > >();
+  }
+
   //void expose_signal()
   //{
     //class_<Signal<Vector, Time>>("Signal", init<std::string>());
