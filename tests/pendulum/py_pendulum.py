@@ -30,9 +30,12 @@ class TestInvertedPendulum(unittest.TestCase):
         for member, value in MEMBERS.items():
             self.assertEqual(getattr(ip2, member), value)
 
-        force = ip.force
-        self.assertTrue(isinstance(force, SignalBase))
-        self.assertEqual(force.time, 0)
+        force_in = ip.force
+        self.assertTrue(isinstance(force_in, SignalBase))
+        self.assertEqual(force_in.time, 0)
+
+        # state_out = ip.state
+        # self.assertTrue(isistance(state_out, SignalBase))
 
 
 if __name__ == '__main__':

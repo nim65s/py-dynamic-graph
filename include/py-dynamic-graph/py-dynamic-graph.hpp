@@ -3,6 +3,7 @@
 
 #include <dynamic-graph/entity.h>
 #include <dynamic-graph/signal-ptr.h>
+#include <dynamic-graph/linear-algebra.h>
 
 #include <boost/python.hpp>
 #include <boost/python/register_ptr_to_python.hpp>

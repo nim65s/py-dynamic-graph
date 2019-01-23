@@ -18,6 +18,7 @@ BOOST_PYTHON_MODULE(libpy_pendulum)
     .add_property("pendulum_length", &InvertedPendulum::getPendulumLength, &InvertedPendulum::setPendulumLength)
     .add_property("viscosity", &InvertedPendulum::getViscosity, &InvertedPendulum::setViscosity)
     .def("incr", &InvertedPendulum::incr)
-    .add_property("force", &InvertedPendulum::getConstForceSignal )
+    .add_property("force", &InvertedPendulum::getForce )
+    .add_property("state", &InvertedPendulum::getState )
     ;
 }

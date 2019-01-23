@@ -58,7 +58,8 @@ namespace dynamicgraph {
 
       void incr(double inTimeStep);
 
-      std::shared_ptr<const SignalBase<int> > getConstForceSignal() const;
+      std::shared_ptr<const SignalPtr<double, int> > getForce() const;
+      std::shared_ptr<const Signal<Vector, int> > getState() const;
 
     protected:
       static const std::string CLASS_NAME;

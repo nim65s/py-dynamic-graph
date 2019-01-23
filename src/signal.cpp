@@ -43,12 +43,22 @@ namespace dynamicgraph
     class_<Signal<T, Time>, bases<SignalBase<Time> >, boost::noncopyable>("Signal", init<std::string>())
       ;
 
+    class_<SignalPtr<T, Time>, bases<Signal<T, Time> >, boost::noncopyable>("SignalPtr", init<Signal<T, Time>*, std::string>())
+      ;
+
 
   }
 
   void register_types()
   {
+
     register_ptr_to_python< std::shared_ptr<SignalBase<Time> const > >();
+
+    register_ptr_to_python< std::shared_ptr<Signal<double, Time> const > >();
+    register_ptr_to_python< std::shared_ptr<Signal<Vector, Time> const > >();
+
+    register_ptr_to_python< std::shared_ptr<SignalPtr<double, Time> const > >();
+    register_ptr_to_python< std::shared_ptr<SignalPtr<Vector, Time> const > >();
   }
 
   //void expose_signal()

@@ -71,7 +71,11 @@ namespace dynamicgraph {
     forceSIN->access(t+1);
   }
 
-  std::shared_ptr<const SignalBase<int> > InvertedPendulum::getConstForceSignal() const {
+  std::shared_ptr<const SignalPtr<double, int> > InvertedPendulum::getForce() const {
     return forceSIN;
+  }
+
+  std::shared_ptr<const Signal<Vector, int> > InvertedPendulum::getState() const {
+    return stateSOUT;
   }
 }
